@@ -43,9 +43,9 @@ class Arachnid
 				begin
 					ip,port,user,pass = grab_proxy
 
-					request = Typhoeus::Request.new(q, :user_agent=>'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', :timeout => 10000, forbid_reuse: true, :follow_location => true) if ip == nil
-					request = Typhoeus::Request.new(q, :user_agent=>'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', :timeout => 10000, forbid_reuse: true, :follow_location => true, :proxy => "#{ip}:#{port}") if ip != nil && user == nil
-					request = Typhoeus::Request.new(q, :user_agent=>'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', :timeout => 10000, forbid_reuse: true, :follow_location => true, :proxy => "#{ip}:#{port}", :proxy_username => user, :proxy_password => pass) if user != nil
+					request = Typhoeus::Request.new(q, :headers => {'User-Agent' => 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}, :timeout => 10000, forbid_reuse: true, :followlocation => true) if ip == nil
+					request = Typhoeus::Request.new(q, :headers => {'User-Agent' => 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}, :timeout => 10000, forbid_reuse: true, :followlocation => true, :proxy => "#{ip}:#{port}") if ip != nil && user == nil
+					request = Typhoeus::Request.new(q, :headers => {'User-Agent' => 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}, :timeout => 10000, forbid_reuse: true, :followlocation => true, :proxy => "#{ip}:#{port}", :proxy_username => user, :proxy_password => pass) if user != nil
 
 					request.on_complete do |response|
 
